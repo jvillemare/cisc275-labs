@@ -14,12 +14,17 @@ public class ImgController2 {
 	ImgController2(MyMovingImageView2 view){
 		this.view = view;
 		model = new MyMovingImageModel2();
-		if (DEBUG) System.out.println("ic created");
+		if (DEBUG) 
+			System.out.println("ic created");
 	}
 	
 	public void drag(MouseEvent event) {
 		Node n = (Node)event.getSource();
-		if (DEBUG) System.out.println("ic mouse drag tx: " + n.getTranslateX() + ", ex: " + event.getX() );
+		
+		if(DEBUG) 
+			System.out.println("ic mouse drag tx: " + 
+					n.getTranslateX() + ", ex: " + event.getX() );
+		
 		model.setX(model.getX() + event.getX()); //event.getX() is the amount of horiz drag
 		model.setY(model.getY() + event.getY());
 		view.setX( model.getX() );
