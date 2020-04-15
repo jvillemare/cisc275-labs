@@ -1,4 +1,4 @@
-package pkgMain;
+package referenceCode;
 
 
 public class MyMovingImageModel2 {

@@ -1,4 +1,4 @@
-package pkgMain;
+package referenceCode;
 
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -30,35 +30,43 @@ public class MyMovingImageView2 extends Application {
 	private final double WIDTH = 800;
 	private final double HEIGHT = 600;
 	
+	private Group root;
+	
 	public MyMovingImageView2(){
     	iv1 = new ImageView();
 		imc = new ImgController2(this);
+	}
+	
+	private ImageView newImage() {
+		Image im1 = new Image(getClass().getResourceAsStream("/img/commonMilkweed.png"));
+    	ImageView iv = new ImageView();
+    	iv.setImage(im1);
+    	iv.setPreserveRatio(true);
+    	iv.setFitHeight(100);
+    	iv.setOnMouseDragged(imc.getHandlerForDrag());
+    	return iv;
 	}
 		
     @Override
     public void start(Stage stage) {
  
-    	Image im1 = new Image(getClass().getResourceAsStream("/img/commonMilkweed.png"));
-    	iv1.setImage(im1);
-    	iv1.setPreserveRatio(true);
-    	iv1.setFitHeight(100);
-    	iv1.setOnMouseDragged(imc.getHandlerForDrag());
+    	iv1 = newImage();
         
 		iv1.setTranslateX(iv1.getLayoutX() - WIDTH/2 + imc.getStartingX());
 		iv1.setTranslateY(iv1.getLayoutY() - HEIGHT/2 + imc.getStartingY());
 	    
-	    Group root = new Group();
+	    this.root = new Group();
 		Scene scene = new Scene(root, WIDTH, HEIGHT);
         stage.setScene(scene);
 		
 		TilePane tile = new TilePane();
 	    tile.setPrefColumns(3);
 	    tile.setPrefRows(3);
-	    tile.getChildren().add(iv1);
+	    //tile.getChildren().add(iv1);
 	    tile.setBackground(
 	    		new Background(
 	    				new BackgroundFill(
-	    						Color.rgb(10, 10, 20),
+	    						Color.rgb(120, 10, 20),
 	    						new CornerRadii(0.1),
 	    						new Insets(3.0)
 	    					)));
@@ -70,7 +78,7 @@ public class MyMovingImageView2 extends Application {
 	    flow.setBackground(
 	    		new Background(
 	    				new BackgroundFill(
-	    						Color.rgb(60, 60, 60),
+	    						Color.rgb(60, 150, 60),
 	    						new CornerRadii(0.1),
 	    						new Insets(3.0)
 	    					)));
@@ -99,10 +107,13 @@ public class MyMovingImageView2 extends Application {
         stage.show();
     }
     public void setX(double x) {
-    	iv1.setTranslateX(iv1.getLayoutX() - WIDTH/2 + x);
+    	//root.getChildren().add(iv1.clone());
+    	root.getChildren().add(newImage());
+    	//iv1.setTranslateX(iv1.getLayoutX() - WIDTH/2 + x);
     }
     public void setY(double y) {
-    	iv1.setTranslateY(iv1.getLayoutY() - HEIGHT/2 + y);
+    	root.getChildren().add(newImage());
+    	//iv1.setTranslateY(iv1.getLayoutY() - HEIGHT/2 + y);
     }
     public static void main(String[] args) {
         launch();

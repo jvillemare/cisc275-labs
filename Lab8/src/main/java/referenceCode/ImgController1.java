@@ -1,4 +1,4 @@
-package pkgMain;
+package referenceCode;
 
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
